@@ -1,33 +1,42 @@
 # Google Calendar MCP Server
 
 This is a Model Context Protocol (MCP) server that provides integration with Google Calendar. It allows LLMs to read, create, update and search for calendar events through a standardized interface.
- 
+
 ## Example Usage
 
 Along with the normal capabilities you would expect for a calendar integration you can also do really dynamic, multi-step processes like:
 
 1. Add events from screenshots and images:
-   ```
+
+   ```text
    Add this event to my calendar based on the attached screenshot.
    ```
+
    Supported image formats: PNG, JPEG, GIF
    Images can contain event details like date, time, location, and description
-   
+
 2. Calendar analysis:
-   ```
+
+   ```text
    What events do I have coming up this week that aren't part of my usual routine?
    ```
+
 3. Check attendance:
-   ```
+
+   ```text
    Which events tomorrow have attendees who have not accepted the invitation?
    ```
+
 4. Auto coordinate events:
-   ```
+
+   ```text
    Here's some available that was provided to me by someone.
    Take a look at the available times and create an event that is free on my work calendar.
    ```
+
 5. Provide your own availability:
-   ```
+
+   ```text
    Please provide availability looking at both my personal and work calendar for this upcoming week.
    Choose times that work well for normal working hours on the East Coast. Meeting time is 1 hour
    ```
@@ -50,19 +59,21 @@ Along with the normal capabilities you would expect for a calendar integration y
    - Choose "User data" for the type of data that the app will be accessing
    - Add your app name and contact information
    - Add the following scopes (optional):
-     - `https://www.googleapis.com/auth/calendar.events` (or broader `https://www.googleapis.com/auth/calendar` if needed)
+        - `https://www.googleapis.com/auth/calendar.events` (or broader `https://www.googleapis.com/auth/calendar` if needed)
    - Select "Desktop app" as the application type (Important!)
    - Add your email address as a test user under the [OAuth Consent screen](https://console.cloud.google.com/apis/credentials/consent)
-      - Note: it will take a few minutes for the test user to be added. The OAuth consent will not allow you to proceed until the test user has propagated.
-      - Note about test mode: While an app is in test mode the auth tokens will expire after 1 week and need to be refreshed by running `npm run auth`.
+        - Note: it will take a few minutes for the test user to be added. The OAuth consent will not allow you to proceed until the test user has propagated.
+        - Note about test mode: While an app is in test mode the auth tokens will expire after 1 week and need to be refreshed by running `npm run auth`.
 
 ## Installation
 
 1. Clone the repository
 2. Install dependencies (this also builds the js via postinstall):
+
    ```bash
    npm install
    ```
+
 3. Download your Google OAuth credentials from the Google Cloud Console (under "Credentials") and rename the file to `gcp-oauth.keys.json` and place it in the root directory of the project.
    - Ensure the file contains credentials for a "Desktop app".
    - Alternatively, copy the provided template file: `cp gcp-oauth.keys.example.json gcp-oauth.keys.json` and populate it with your credentials from the Google Cloud Console.
@@ -131,6 +142,7 @@ Tests mock external dependencies (Google API, filesystem) to ensure isolated tes
 ## Usage with Claude Desktop
 
 1. Add this configuration to your Claude Desktop config file. E.g. `/Users/<user>/Library/Application Support/Claude/claude_desktop_config.json`:
+
    ```json
    {
      "mcpServers": {
@@ -141,10 +153,10 @@ Tests mock external dependencies (Google API, filesystem) to ensure isolated tes
      }
    }
    ```
+
    Note: Replace `<absolute-path-to-project-folder>` with the actual path to your project directory.
 
 2. Restart Claude Desktop
-
 
 ## Development
 
